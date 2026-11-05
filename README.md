@@ -1,15 +1,15 @@
 # Meus Gastos — Kotlin + Jetpack Compose + MVVM
 
-Aplicativo de controle de gastos desenvolvido em Kotlin com Jetpack Compose e arquitetura MVVM, seguindo a identidade visual da referência da atividade.
+Aplicativo de controle de gastos desenvolvido em Kotlin com Jetpack Compose, seguindo a arquitetura Model–ViewModel–View e a identidade visual da referência da atividade.
 
 ## Funcionalidades
 
 - Cadastro de gastos com descrição, valor e categoria.
 - Categorias: Alimentação, Transporte, Moradia, Lazer e Outros.
 - Filtro por categoria.
-- Resumo do total e da quantidade de gastos.
+- Resumo calculado do total e da quantidade de gastos visíveis.
 - Remoção individual de gastos.
-- Validação dos campos do formulário.
+- Validação dos campos no ViewModel.
 
 ## Estrutura
 
@@ -26,24 +26,21 @@ br.unasp.meusgastos/
 └── MainActivity.kt
 ```
 
-## Configuração no Android Studio
+## Abrir e executar
 
-1. Crie um projeto **Empty Activity** com Kotlin e Jetpack Compose.
-2. Configure o package como `br.unasp.meusgastos`.
-3. Copie os arquivos Kotlin deste repositório para os caminhos correspondentes.
-4. Confira as dependências do módulo `app`:
+1. Abra a pasta raiz deste repositório no Android Studio.
+2. Aguarde o Gradle sincronizar e instale um Android SDK compatível com `compileSdk = 35`.
+3. Execute a configuração `app` em um emulador ou dispositivo Android.
 
-```kotlin
-implementation(platform("androidx.compose:compose-bom:<versão-do-projeto>"))
-implementation("androidx.activity:activity-compose")
-implementation("androidx.compose.ui:ui")
-implementation("androidx.compose.ui:ui-tooling-preview")
-implementation("androidx.compose.material3:material3")
-implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.10.0")
-debugImplementation("androidx.compose.ui:ui-tooling")
-```
+O projeto inclui configurações Gradle Kotlin DSL, Version Catalog e Manifest. Se o Android Studio solicitar a instalação/atualização de componentes do SDK, aceite e sincronize novamente.
 
-Use a versão da Compose BOM compatível com o template/Android Studio instalado, sem duplicar dependências que já existam no projeto.
+## Dependências principais
+
+- Kotlin 2.0.21
+- Android Gradle Plugin 8.7.3
+- Jetpack Compose via Compose BOM 2025.01.00
+- Lifecycle ViewModel Compose 2.10.0
+- Java 17
 
 ## Identidade visual
 
@@ -55,12 +52,15 @@ Use a versão da Compose BOM compatível com o template/Android Studio instalado
 | Fundo | `#F1F5F9` |
 | Cartões | `#FFFFFF` |
 
-## Repositório de dados
+## Repositórios
 
-O ViewModel utiliza `GastoRepositoryMemoria` por padrão, com lista inicialmente vazia. Os dados permanecem apenas em memória e são perdidos ao encerrar o processo do aplicativo.
-
-A classe `GastoRepositoryDemo` contém gastos de exemplo para demonstrar uma lista preenchida. Para usá-la, altere a implementação padrão no construtor de `GastosViewModel` para `GastoRepositoryDemo()`.
+O ViewModel depende da interface `GastoRepository`. Por padrão, utiliza `GastoRepositoryMemoria`, que começa vazia. `GastoRepositoryDemo` disponibiliza quatro gastos de exemplo para a demonstração da Etapa 6. Para alternar a fonte, basta mudar a implementação padrão no construtor do ViewModel.
 
 ## Previews
 
-O arquivo `TelaGastos.kt` inclui previews para o resumo, item de gasto, formulário com erro, filtros e tela.
+O arquivo `TelaGastos.kt` inclui cinco previews: resumo, item de gasto, formulário com erro, filtros e tela completa. Os componentes visuais recebem dados e callbacks, sem depender diretamente do ViewModel.
+
+## Documentação da atividade
+
+- [ARQUITETURA.md](ARQUITETURA.md): respostas às três perguntas da Etapa 8.
+- [ESTRAGOS.md](ESTRAGOS.md): previsões e análise dos cinco experimentos da Etapa 7. Os resultados reais e mensagens literais precisam ser preenchidos após executar os testes.
