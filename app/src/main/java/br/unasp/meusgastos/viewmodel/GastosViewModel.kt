@@ -10,7 +10,7 @@ import br.unasp.meusgastos.model.Gasto
 import br.unasp.meusgastos.model.GastoRepository
 import br.unasp.meusgastos.model.GastoRepositoryMemoria
 
-class GastosViewModel(
+class GastosViewModel @JvmOverloads constructor(
     private val repositorio: GastoRepository = GastoRepositoryMemoria()
 ) : ViewModel() {
 
