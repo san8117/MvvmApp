@@ -292,5 +292,5 @@ fun FiltroCategoriasPreview() {
 @Preview(showBackground = true)
 @Composable
 fun TelaGastosPreview() {
-    MaterialTheme { TelaGastos(vm = viewModel()) }
+    MaterialTheme { TelaGastos(vm = GastosViewModel()) }
 }
